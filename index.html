@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invitación de Cumpleaños Sharon </title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, #ffe4f2 0%, #d7f0ff 100%);
+    background-image: url('fondohuellitas.jpg'); /* fondo con huellitas */
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+  }
+
+  .envelope {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    perspective: 1000px;
+    overflow: hidden;
+  }
+
+  .flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #ffb6c1;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform 0.8s ease-in-out;
+    z-index: 2;
+  }
+
+  .open .flap {
+    transform: rotateX(180deg);
+  }
+
+  .skye {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-80px);
+    width: 150px;
+    z-index: 3;
+    transition: transform 0.6s ease;
+  }
+
+  .open .skye {
+   opacity: 0;
+   }
+
+  .front-name {
+    position: absolute;
+    top: 62%;
+    right: 10%;
+    left: 0;
+    width: 100%;
+    text-align: left;
+    color: #ff66a3;
+    font-weight: bold;
+    font-size: 22px;
+    text-shadow: 1px 1px 2px white;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .open .front-name {
+    opacity: 0;
+    
+  }
+
+  .inside {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #fff0fa 0%, #e7f8ff 100%);
+    border-radius: 12px;
+    box-shadow: inset 0 0 15px rgba(255,192,203,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.6s ease 0.3s;
+    z-index: 0;
+  }
+
+  .open .inside {
+    opacity: 100;
+  }
+
+  .inside h2 {
+    color: #ff69b4;
+    font-size: 22px;
+    margin: 0 0 10px 0;
+  }
+
+  .inside p {
+    margin: 4px 0;
+    color: #333;
+    text-align: center;
+  }
+
+  .inside .paw {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .hint {
+    position: absolute;
+    bottom: -36px;
+    width: 100%;
+    text-align: height;
+    font-size: 14px;
+    color: #555;
+    animation: blink 1.6s infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0.4; }
+  }
+</style>
+</head>
+<body>
+
+<div class="envelope" id="sobre">
+  <img class="skye" src="skya (2).png" alt="Skye">
+  <div class="flap"></div>
+
+
+  <!-- Nombre afuera del sobre -->
+  <div class="front-name" id="nombreFrente">Para: Invitado</div>
+  
+  <!-- Contenido dentro del sobre -->
+  <div class="inside">
+    <h2>
+    </h2>
+    <video src="video.mp4" autoplay loop muted playsinline style="width:300px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+      Tu navegador no soporta video.
+    </video>
+    <div class="hint">Haz clic para abrir el sobre 💌</div>
+  </div>
+
+<script>
+  // Obtener nombre desde la URL
+  const params = new URLSearchParams(window.location.search);
+  const nombre = params.get("nombre") || "";
+  
+  // Poner nombre en el frente
+  const nombreFrenteEl = document.getElementById("nombreFrente");
+  if (nombreFrenteEl) {
+    nombreFrenteEl.textContent = nombre ? `Para: ${nombre}` : "Para:";
+  }
+
+
+  // Animación de abrir
+  const sobre = document.getElementById("sobre");
+  sobre.addEventListener("click", () => {
+    sobre.classList.toggle("open");
+  });
+</script>
+
+</body>
+</html>
